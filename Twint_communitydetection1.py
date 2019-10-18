@@ -85,15 +85,16 @@ import twint
 G = nx.Graph()
 G.add_nodes_from(dict_memberorgs)
 
-c = twint.Config()
-c.Hide_output = True
+followers = []
 
 for i in G:
+    c = twint.Config()
+    c.Hide_output = True
     c.Username = i
     #c.User_full = True
     c.Store_object = True
     twint.run.Followers(c)
-    followers = twint.output.follows_list
+    followers.append(twint.output.follows_list)
 G.add_nodes_from(followers)
 print(G.__len__())
 
